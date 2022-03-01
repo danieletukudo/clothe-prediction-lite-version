@@ -1,1 +1,1 @@
-web: python predictorlive.py
+web: gunicorn predictorlive:app
