@@ -27,7 +27,7 @@ def about():
     if request.method == 'POST':
         # data = request.get_json()
         model = tf.keras.models.load_model("./model")
-        response = requests.get(request.form.get('picture'))
+        response = requests.get(request.get_json()['picture'])
         # response = requests.get('https://5.imimg.com/data5/NS/VE/MY-38748036/designer-midi-top-500x500.jpg')
         with open('image.jpg', 'wb') as f:
             f.write(response.content)
