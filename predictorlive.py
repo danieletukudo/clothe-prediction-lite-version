@@ -27,7 +27,8 @@ def about():
     if request.method == 'POST':
         # data = request.get_json()
         model = tf.keras.models.load_model("./model")
-        response = requests.get(request.get_json()['picture'])
+        pictureLink = request.get_json()['picture']
+        response = requests.get(pictureLink)
         # response = requests.get('https://5.imimg.com/data5/NS/VE/MY-38748036/designer-midi-top-500x500.jpg')
         with open('image.jpg', 'wb') as f:
             f.write(response.content)
@@ -36,22 +37,22 @@ def about():
         # imgplot = plt.imshow(os.path.abspath(os.getcwd()) + '/image.jpg')
         if prediction == 0:
             return jsonify({
-                "pictureLink": request.form.get('picture'),
+                "pictureLink": pictureLink,
                 "pictureType": "casual"
                 })
         elif prediction == 1:
             return jsonify({
-                "pictureLink": request.form.get('picture'),
+                "pictureLink": pictureLink,
                 "pictureType": "offical"
                 })
         elif prediction == 2:
             return jsonify({
-                "pictureLink": request.form.get('picture'),
+                "pictureLink": pictureLink,
                 "pictureType": "sports"
                 })
         else:
             return jsonify({
-                "pictureLink": request.form.get('picture'),
+                "pictureLink": pictureLink,
                 "pictureType": "unknown"
                 })
     return 'This is a get request'
